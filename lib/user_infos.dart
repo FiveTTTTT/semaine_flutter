@@ -90,6 +90,19 @@ class _UserInfoState extends State<UserInfos> {
               'Save',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
             )),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UserInfos(
+                        username: userNameController.text, userId: widget.userId, userService: widget.userService,
+                      )));
+            },
+            child: const Text(
+              'Update',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
+            )),
       ]),
     );
   }
