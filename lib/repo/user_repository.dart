@@ -6,6 +6,7 @@ class DatabaseConnection {
   Future<Database> setDatabase() async {
     var directory = await getApplicationDocumentsDirectory();
     var path = join(directory.path, 'db_users');
+    resetDatabase(path);
     var database = await openDatabase(path, version: 1, onCreate: _createDatabase);
     return database;
   }
@@ -17,6 +18,16 @@ class DatabaseConnection {
         userId INTEGER
       );""";
     await database.execute(sql);
+  }
+  Future<void> deleteDatabase(String path) async {
+    var directory = await getApplicationDocumentsDirectory();
+    var path = join(directory.path, 'db_users');
+    await deleteDatabase(path);
+  }
+
+  Future<Database> resetDatabase(String path) async {
+    await deleteDatabase(path);
+    return await setDatabase();
   }
 }
 
@@ -42,6 +53,7 @@ class UserRepository {
   }
 
   Future<int?> insertData(Map<String, dynamic> data) async {
+    print("on va test $data");
     var connection = await database;
     return await connection?.insert(
       table,

@@ -36,16 +36,7 @@ class _UserInfoState extends State<UserInfos> {
       // En cas d'erreur lors de la récupération des utilisateurs
       print("Une erreur s'est produite lors de la récupération des utilisateurs : $error");
     });
-    if (_formkey.currentState != null && _formkey.currentState!.validate()) {
-      print(userNameController.text);
-      var theUser =
-          User(userId: widget.userId, username: userNameController.text);
-      // Appelez la méthode saveUser du service UserService
-      widget.userService.updateUser(theUser);
-      print('login successful!');
-    } else {
-      print('not successful!');
-    }
+
   }
 
   @override

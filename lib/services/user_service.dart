@@ -10,7 +10,6 @@ class UserService {
 
   //Save User
   Future<int> saveUser(User user) async {
-    print("to save $user");
     return (await _repository.insertData(user.toMap()))!;
   }
 
