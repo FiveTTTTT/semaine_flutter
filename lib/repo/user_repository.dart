@@ -6,7 +6,6 @@ class DatabaseConnection {
   Future<Database> setDatabase() async {
     var directory = await getApplicationDocumentsDirectory();
     var path = join(directory.path, 'db_users');
-    resetDatabase(path);
     var database = await openDatabase(path, version: 1, onCreate: _createDatabase);
     return database;
   }
@@ -15,7 +14,7 @@ class DatabaseConnection {
     String sql = """CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         username TEXT,
-        userId INTEGER
+        userId TEXT
       );""";
     await database.execute(sql);
   }
@@ -53,7 +52,6 @@ class UserRepository {
   }
 
   Future<int?> insertData(Map<String, dynamic> data) async {
-    print("on va test $data");
     var connection = await database;
     return await connection?.insert(
       table,
@@ -73,12 +71,13 @@ class UserRepository {
   }
 
   Future<int?> updateData(Map<String, dynamic> data) async {
+    print("ca passe ici ? $data");
     var connection = await database;
-    return await connection?.update(table, data, where: 'id = ?', whereArgs: [data['id']]);
+    return await connection?.update(table, data, where: 'userId = ?', whereArgs: [data['userId']]);
   }
 
   Future<int?> deleteDataById(int userId) async {
     var connection = await database;
-    return await connection?.delete(table, where: 'id = ?', whereArgs: [userId]);
+    return await connection?.delete(table, where: 'userId = ?', whereArgs: [userId]);
   }
 }

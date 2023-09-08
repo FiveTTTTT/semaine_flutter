@@ -26,6 +26,16 @@ class _UserInfoState extends State<UserInfos> {
   final _formkey = GlobalKey<FormState>();
 
   void updateUserName(context) {
+    if (_formkey.currentState != null && _formkey.currentState!.validate()) {
+      print(userNameController.text);
+      var theUser =
+      User(userId: widget.userId, username: userNameController.text);
+      // Appelez la méthode saveUser du service UserService
+      widget.userService.updateUser(theUser);
+      print('login successful!');
+    } else {
+      print('not successful!');
+    }
     widget.userService.readAllUsers().then((List<User> userList) {
       // userList contient la liste d'utilisateurs
       print("Liste d'utilisateurs :");
@@ -43,7 +53,6 @@ class _UserInfoState extends State<UserInfos> {
   Widget build(BuildContext context) {
     String username = widget.username;
     String userId = widget.userId;
-    print("hello "+widget.userId + widget.username);
 
     return Scaffold(
       body: Column(children: [

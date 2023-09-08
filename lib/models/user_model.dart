@@ -34,7 +34,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      userId: map['userId']?.toInt(),
+      userId: map['userId'],
         username: map['username']
     );
   }
