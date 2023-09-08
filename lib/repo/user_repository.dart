@@ -71,7 +71,6 @@ class UserRepository {
   }
 
   Future<int?> updateData(Map<String, dynamic> data) async {
-    print("ca passe ici ? $data");
     var connection = await database;
     return await connection?.update(table, data, where: 'userId = ?', whereArgs: [data['userId']]);
   }

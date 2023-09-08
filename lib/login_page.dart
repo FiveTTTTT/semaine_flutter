@@ -16,8 +16,6 @@ class LoginPage extends StatelessWidget {
 
   void loginUser(context) {
     if (_formkey.currentState != null && _formkey.currentState!.validate()) {
-      print(userNameController.text);
-      print(passwordController.text);
       Random random = Random();
       int randomNumber = random.nextInt(100)+100;
       var theUser = User(userId: randomNumber.toString(), username:userNameController.text);

@@ -30,11 +30,10 @@ class _UserInfoState extends State<UserInfos> {
       print(userNameController.text);
       var theUser =
       User(userId: widget.userId, username: userNameController.text);
-      // Appelez la méthode saveUser du service UserService
       widget.userService.updateUser(theUser);
-      print('login successful!');
+      print('username updated!');
     } else {
-      print('not successful!');
+      print('username not updated!');
     }
     widget.userService.readAllUsers().then((List<User> userList) {
       // userList contient la liste d'utilisateurs

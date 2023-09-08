@@ -21,7 +21,6 @@ class UserService {
 
   //Edit User
   Future<int> updateUser(User user) async {
-    print("to update $user");
     return (await _repository.updateData(user.toMap()))!;
   }
 
